@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You, On Your Day</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #f9d8e9, #e6c7f5);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3a2a3b;
+    text-align: center;
+    overflow: hidden;
+  }
+  .container {
+    position: absolute;
+    width: 90%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .active { opacity: 1; z-index: 2; }
+  h1 { font-size: 1.8rem; margin-bottom: 15px; }
+  p { font-size: 1.1rem; line-height: 1.6; }
+  .btns { display: flex; justify-content: space-between; margin-top: 25px; }
+  button {
+    background-color: #e8b4d8;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  button:hover { background-color: #d99dd2; }
+  #music-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #fff;
+    border-radius: 50px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 10;
+  }
+</style>
+</head>
+<body>
+
+<audio id="bg-music">
+  <source src="happy-birthday-334876.mp3" controls>
+</audio>
+
+<div id="music-btn">🎵 Play Music</div>
+
+<div class="container active" id="page1">
+  <h1>For You, on Your Day</h1>
+  <p>I know birthdays haven’t always been easy for you… but I wanted to remind you how much light you carry, even on the hardest days.</p>
+  <div class="btns">
+    <span></span>
+    <button onclick="changePage(2)">Next →</button>
+  </div>
+</div>
+
+<div class="container" id="page2">
+  <h1>You Deserve Peace</h1>
+  <p>I know this day brings back memories that still hurt. But I also know you’ve handled them with quiet strength. You may not celebrate much, but I want you to remember — your presence itself is worth celebrating.</p>
+  <div class="btns">
+    <button onclick="changePage(1)">← Back</button>
+    <button onclick="changePage(3)">Next →</button>
+  </div>
+</div>
+
+<div class="container" id="page3">
+  <h1>The Little Things About You</h1>
+  <p>The way you talk about your family with care.<br>
+     The calmness in your words, even when things are heavy.<br>
+     The smile that somehow still appears, even when the heart doesn’t feel like it.</p>
+  <div class="btns">
+    <button onclick="changePage(2)">← Back</button>
+    <button onclick="changePage(4)">Next →</button>
+  </div>
+</div>
+
+<div class="container" id="page4">
+  <h1>A Tiny Smile for You</h1>
+  <p>And maybe… if you ever smile while reading this, I’ll take it as the best gift I could get on your birthday. 😌</p>
+  <div class="btns">
+    <button onclick="changePage(3)">← Back</button>
+    <button onclick="changePage(5)">Next →</button>
+  </div>
+</div>
+
+<div class="container" id="page5">
+  <h1>You’re Not Alone</h1>
+  <p>No matter how this day feels, remember — you’ve got someone silently wishing peace for you. You don’t have to celebrate, but I hope you feel a little warmth today.<br><br>– Amaan 💫</p>
+  <div class="btns">
+    <button onclick="changePage(4)">← Back</button>
+  </div>
+</div>
+
+<script>
+let current = 1;
+
+function changePage(next) {
+  document.getElementById(`page${current}`).classList.remove('active');
+  document.getElementById(`page${next}`).classList.add('active');
+  current = next;
+}
+
+const musicBtn = document.getElementById("music-btn");
+const bgMusic = document.getElementById("bg-music");
+
+musicBtn.addEventListener("click", () => {
+  if (bgMusic.paused) {
+    bgMusic.play().then(() => {
+      musicBtn.textContent = "⏸ Pause Music";
+    }).catch(() => {
+      alert("Please tap once to allow music playback.");
+    });
+  } else {
+    bgMusic.pause();
+    musicBtn.textContent = "🎵 Play Music";
+  }
+});
+</script>
+</body>
+</html>
